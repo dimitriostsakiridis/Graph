@@ -1,5 +1,7 @@
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        Graph g = new Graph(3);
+        System.out.println(g.adjmatrix());
+        ;
     }
 }
