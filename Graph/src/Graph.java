@@ -64,6 +64,7 @@ public class Graph {
     public void insertVertice(Object x, int index) {
         if (getVertice(index) != null) {
             System.out.println("Replace Vertice " + index + "?(Y/N)");
+            @SuppressWarnings("resource")
             Scanner input = new Scanner(System.in);
             String opt = input.nextLine().toUpperCase();
             switch (opt) {
@@ -79,14 +80,14 @@ public class Graph {
     public void newEdge(int x, int y) throws NoSuchElementException {
         if (this.getVertice(x) == null)
             throw new NoSuchElementException("Starting vertice not found.");
-        if (x != y)
+        if (x == y)
             this.edges[x][y] = this.edges[y][x] = 2;
         else
-            this.edges[x][y] = 2;
+            this.edges[x][y] = 1;
     }
 
     public String adjmatrix() {
-        String s;
+        String s = "";
         for (int i = 0; i < this.edges.length; i++) {
             s += "\n";
             for (int j = 0; j < this.edges.length; j++)
