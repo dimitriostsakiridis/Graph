@@ -1,3 +1,3 @@
 # Graph
 
-test
+An implementation for graph data structure
