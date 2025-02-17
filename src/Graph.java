@@ -21,8 +21,8 @@ class Vertex {
 public class Graph implements IGraph {
     public int[][] edges;
     private Vertex[] vertices;
-    private int edgeCount = 0;
-    private int vertexCount = 0;
+    private int edgeCount;
+    private int vertexCount;
     private boolean isDirected;
 
     public Graph(int V, int E) {
@@ -33,6 +33,8 @@ public class Graph implements IGraph {
         this.edges = new int[E][E];
         this.vertices = new Vertex[V];
         this.isDirected = isDirected;
+        this.vertexCount = 0;
+        this.edgeCount = 0;
     }
 
     public void addVertex(Object[] V) {
@@ -82,4 +84,45 @@ public class Graph implements IGraph {
         }
 
     }
+
+    public int getOutDergee(int vIndex) {
+        int deg = 0;
+        for (int i = 0; i < this.edges[vIndex].length; i++)
+            if (this.edges[vIndex][i] != 0)
+                deg++;
+        return deg;
+    }
+
+    public int getInDegree(int vIndex) {
+        int deg = 0;
+        for (int i = 0; i < this.edges.length; i++)
+            if (this.edges[i][vIndex] != 0)
+                deg++;
+        return deg;
+    }
+
+    public boolean isDirected() {
+        return isDirected;
+    }
+
+    public int getDegree(int vIndex) {
+        if (isDirected)
+            return (getInDegree(vIndex) + getOutDergee(vIndex));
+        return getInDegree(vIndex);
+    }
+
+    public boolean hasEuler() throws Exception {
+        if (isDirected)
+            throw new Exception("Graph is directed");
+        if (vertexCount < 3)
+            throw new Exception("Graph has less than 3 vertices");
+
+        boolean euler = true;
+        for (int i = 0; i < this.vertexCount; i++)
+            if (getDegree(i) % 2 != 0)
+                euler = false;
+
+        return euler;
+    }
+
 }
