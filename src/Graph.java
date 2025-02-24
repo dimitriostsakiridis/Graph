@@ -125,4 +125,14 @@ public class Graph implements IGraph {
         return euler;
     }
 
+    public void removeEdge(int src, int dest){
+        this.edges[src][dest]=0;
+        if(isDirected)
+            this.edges[dest][src]=0;
+    }
+
+    public boolean isAdjcent(int src, int dest){
+        return this.edges[src][dest]!=0;
+    }
+
 }
